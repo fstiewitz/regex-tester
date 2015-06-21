@@ -1,0 +1,58 @@
+@import "ui-variables";
+
+.regex-tester {
+  .icon-close {
+    position: absolute;
+    right: 5px;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .header {
+    border: 1px solid @tab-bar-background-color;
+    background-color: @tool-panel-background-color;
+    display: flex;
+    margin: 0 0 5px 0;
+  }
+
+  .name {
+    cursor: default;
+    height: @component-icon-size;
+  }
+
+  .output {
+    margin: 5px;
+    overflow-y: visible;
+    font-family: monospace;
+    white-space: pre-wrap;
+    background-color: @input-background-color;
+    color: @text-color-selected;
+  }
+
+  .icon-close {
+    &:before {
+      font-family: 'Octicons Regular';
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      text-decoration: none;
+      font-size: 12px;
+      width: @component-icon-size;
+      height: @component-icon-size;
+      content: "\f081";
+    }
+
+    &:hover {
+      color: #ffffff;
+      cursor: pointer;
+    }
+  }
+
+  .error {
+    color: @text-color-error;
+  }
+}

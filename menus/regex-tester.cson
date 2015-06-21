@@ -1,0 +1,14 @@
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'regex-tester'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'regex-tester:toggle'
+        }
+      ]
+    ]
+  }
+]
