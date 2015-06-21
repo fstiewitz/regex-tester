@@ -25,6 +25,10 @@ module.exports =
       @RegexEditor = @regex_data.getModel()
       @TestEditor = @test_data.getModel()
 
+      @RegexEditor.setText ''
+      @TestEditor.setText ''
+      @find('.btn').removeClass 'selected'
+
       @on 'click', '.btn', (e) =>
         item = e.currentTarget
         if item.classList.contains 'selected'
@@ -68,8 +72,6 @@ module.exports =
             output.push(JSON.stringify {match: res[0], groups: res.slice(1)}, null, 2)
             break if not @global.hasClass('selected')
           if output.length isnt 0
-            if output.length isnt 1 and not @global.hasClass('selected')
-              output.splice(0,1)
             @output.html(output.toString())
           else
             @output.html("<span class='error'>RegExp failed!</span>")
