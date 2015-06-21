@@ -11,13 +11,14 @@ module.exports =
         @div class: 'header', =>
           @div class: 'name bold', 'RegEx Tester'
         @div class:'block flex', =>
-          @div class:'editor-item', =>
+          @div class:'editor-item flex-editor', =>
             @subview 'regex_data', new TextEditorView({mini:true, placeholderText:'Regular Expression'})
           @div class:'btn-group', =>
             @button outlet:'global', class:'btn icon icon-globe'
             @button outlet:'ignore_case', class:'btn', 'Aa'
         @div class:'block', =>
-          @subview 'test_data', new TextEditorView({mini:true, placeholderText:'Test Input'})
+          @div class:'editor-item', =>
+            @subview 'test_data', new TextEditorView({mini:true, placeholderText:'Test Input'})
         @div class:'output', outlet: 'output'
 
     initialize: ->
