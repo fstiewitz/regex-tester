@@ -1,5 +1,5 @@
-# regex-tester package
+regex-tester
+============
+[![Build Status](https://travis-ci.org/deprint/regex-tester.svg)](https://travis-ci.org/deprint/regex-tester) [![Dependency Status](https://david-dm.org/deprint/regex-tester.svg)](https://david-dm.org/deprint/regex-tester) [![apm](https://img.shields.io/apm/dm/regex-tester.svg)](https://github.com/deprint/regex-tester) [![apm](https://img.shields.io/apm/v/regex-tester.svg)](https://github.com/deprint/regex-tester)
 
-A short description of your package.
-
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+## Test Javascript regular expressions
