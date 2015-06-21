@@ -24,11 +24,31 @@
 
   .output {
     margin: 5px;
-    overflow-y: visible;
+    max-height: 200px;
+    overflow-y: scroll;
     font-family: monospace;
     white-space: pre-wrap;
     background-color: @input-background-color;
     color: @text-color-selected;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .editor-item {
+    flex: 1;
+    padding: 0 5px 0 0;
+  }
+
+  .btn-group {
+    flex: none;
+    display: flex;
+
+    .btn {
+      flex: 1;
+    }
   }
 
   .icon-close {
