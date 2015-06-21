@@ -2,7 +2,7 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'regex-tester'
+      'label': 'Regex-Tester'
       'submenu': [
         {
           'label': 'Toggle'

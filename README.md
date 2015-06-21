@@ -4,3 +4,5 @@ regex-tester
 
 ## Test Javascript regular expressions
 ![regex-tester](https://cloud.githubusercontent.com/assets/7817714/8271615/f99ad49a-1820-11e5-9b50-d16facc38511.png)
+
+Run `regex-tester:toggle` to open the panel
