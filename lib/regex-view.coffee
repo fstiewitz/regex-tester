@@ -1,4 +1,4 @@
-{$, TextEditorView, View} = require 'atom-space-pen-views'
+{$, $$, TextEditorView, View} = require 'atom-space-pen-views'
 {CompositeDisposable} = require 'atom'
 XRegExp = require('xregexp').XRegExp
 
@@ -82,6 +82,10 @@ module.exports =
       @panel.show()
       @regex_data.focus()
 
+    setEditorMinis: (reg, test) ->
+      @RegexEditor.setMini(reg)
+      @TestEditor.setMini(test)
+
     updateRegExp: (options) ->
       @regex = new RegExp(@RegexEditor.getText(), options)
       text = @TestEditor.getText()
@@ -105,14 +109,23 @@ module.exports =
       text = @TestEditor.getText()
       if @regex? and @RegexEditor.getText() isnt '' and text isnt ''
         output = []
-        while (res = XRegExp.exec text, @regex)?
+        _text = text
+        while true
+          break if _text is '' or not _text?
+          _res = @regex.exec text
+          break unless _res?
+
+          res = XRegExp.exec _text, @regex
+          break unless res?
+          _text = _text.substr(@regex.lastIndex)
+
           m = Object.keys(res).filter (value) ->
             not (/[\d]+|input|index/.test(value))
           if m.length isnt 0
             groups = {}
             for name in m
               groups[name] = res[name]
-            output.push(JSON.stringify {match: res.input, named_groups: groups, groups: res.slice(1)}, null, 2)
+            output.push(JSON.stringify {match: res.input, named_groups: groups, groups: res.slice(1).toString()}, null, 2)
           else
             output.push(JSON.stringify {match: res[0], groups: res.slice(1)}, null, 2)
           break if not @global.hasClass('selected')
@@ -124,6 +137,7 @@ module.exports =
         @output.html('')
 
     update: ->
+      @setEditorMinis not (@xregexp.hasClass('selected') and @free_space.hasClass('selected')), not @multiline.hasClass('selected')
       try
         options = ''
         options = 'g' if @global.hasClass('selected')
