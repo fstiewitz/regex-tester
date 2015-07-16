@@ -1,6 +1,7 @@
 {$, $$, TextEditorView, View} = require 'atom-space-pen-views'
 {CompositeDisposable} = require 'atom'
-XRegExp = require('xregexp').XRegExp
+xregex = require './xregex'
+regex = require './regex'
 
 module.exports =
   class RegexView extends View
@@ -86,66 +87,27 @@ module.exports =
       @RegexEditor.setMini(reg)
       @TestEditor.setMini(test)
 
-    updateRegExp: (options) ->
-      @regex = new RegExp(@RegexEditor.getText(), options)
-      text = @TestEditor.getText()
-      if @regex? and @RegexEditor.getText() isnt '' and text isnt ''
-        output = []
-        while (res = @regex.exec text)?
-          output.push(JSON.stringify {match: res[0], groups: res.slice(1)}, null, 2)
-          break if not @global.hasClass('selected')
-        if output.length isnt 0
-          @output.html(output.toString())
-        else
-          @output.html("<span class='error'>RegExp failed!</span>")
-      else
-        @output.html('')
-
-    updateXRegExp: (options) ->
-      options += 'n' if @explicit_capture.hasClass('selected')
-      options += 's' if @dot_all.hasClass('selected')
-      options += 'x' if @free_space.hasClass('selected')
-      @regex = new XRegExp(@RegexEditor.getText(), options)
-      text = @TestEditor.getText()
-      if @regex? and @RegexEditor.getText() isnt '' and text isnt ''
-        output = []
-        _text = text
-        while true
-          break if _text is '' or not _text?
-          _res = @regex.exec text
-          break unless _res?
-
-          res = XRegExp.exec _text, @regex
-          break unless res?
-          _text = _text.substr(@regex.lastIndex)
-
-          m = Object.keys(res).filter (value) ->
-            not (/[\d]+|input|index/.test(value))
-          if m.length isnt 0
-            groups = {}
-            for name in m
-              groups[name] = res[name]
-            output.push(JSON.stringify {match: res.input, named_groups: groups, groups: res.slice(1).toString()}, null, 2)
-          else
-            output.push(JSON.stringify {match: res[0], groups: res.slice(1)}, null, 2)
-          break if not @global.hasClass('selected')
-        if output.length isnt 0
-          @output.html(output.toString())
-        else
-          @output.html("<span class='error'>RegExp failed!</span>")
-      else
-        @output.html('')
-
     update: ->
       @setEditorMinis not (@xregexp.hasClass('selected') and @free_space.hasClass('selected')), not @multiline.hasClass('selected')
+
+      options =
+        global: @global.hasClass('selected')
+        multiline: @multiline.hasClass('selected')
+        ignore_case: @ignore_case.hasClass('selected')
+        free_space: @free_space.hasClass('selected')
+        explicit: @explicit_capture.hasClass('selected')
+        dot: @dot_all.hasClass('selected')
       try
-        options = ''
-        options = 'g' if @global.hasClass('selected')
-        options += 'i' if @ignore_case.hasClass('selected')
-        options += 'm' if @multiline.hasClass('selected')
         if @xregexp.hasClass 'selected'
-          @updateXRegExp options
+          m = xregex.getMatches @RegexEditor.getText(), @TestEditor.getText(), options
         else
-          @updateRegExp options
+          m = regex.getMatches @RegexEditor.getText(), @TestEditor.getText(), options
+        if m?
+          if m.length isnt 0
+            @output.html JSON.stringify m
+          else
+            @output.html "<span class='error'>RegExp failed!</span>"
+        else
+          @output.html ''
       catch error
         @output.html "<span class='error'>#{error.message}</span>"
