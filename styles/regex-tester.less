@@ -1,6 +1,11 @@
 @import "ui-variables";
 
 .regex-tester {
+  .body {
+    margin: 5px 0 0 0;
+    max-height: 700px;
+    overflow-y: scroll;
+  }
 
   .bold {
     font-weight: bold;
@@ -20,15 +25,27 @@
 
   .output {
     margin: 5px;
-    max-height: 200px;
-    overflow-y: scroll;
     font-family: monospace;
     white-space: pre-wrap;
     background-color: @input-background-color;
+
+    .match {
+      margin: 2px 1px 2px 1px;
+      padding: 2px;
+      background-color: @overlay-background-color;
+
+      .key {
+        font-weight: bold;
+      }
+    }
   }
 
   .hidden {
     display: none;
+  }
+
+  .block {
+    margin: 5px 0 5px 0;
   }
 
   .flex {
@@ -42,16 +59,6 @@
 
   .editor-item {
     padding: 0 5px 0 5px;
-
-    atom-text-editor {
-      max-height: 300px;
-      overflow-y: auto;
-    }
-  }
-
-  .btn-groups {
-    flex: none;
-    display: flex;
   }
 
   .btn-group {
