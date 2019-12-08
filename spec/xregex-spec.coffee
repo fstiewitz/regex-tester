@@ -45,22 +45,22 @@ describe 'XRegExp tests', ->
       expect(m).toEqual [
         {
           match: 'a'
-          named_groups: undefined
+          named_groups: { groups: undefined }
           groups: ['a']
         }
         {
           match: 'b'
-          named_groups: undefined
+          named_groups: { groups: undefined }
           groups: ['b']
         }
         {
           match: 'b'
-          named_groups: undefined
+          named_groups: { groups: undefined }
           groups: ['b']
         }
         {
           match: 'a'
-          named_groups: undefined
+          named_groups: { groups: undefined }
           groups: ['a']
         }
       ]
@@ -79,12 +79,12 @@ describe 'XRegExp tests', ->
       expect(m).toEqual [
         {
           match: 'abba'
-          named_groups: undefined
+          named_groups: { groups: undefined }
           groups: ['abba']
         }
         {
           match: 'baab'
-          named_groups: undefined
+          named_groups: { groups: undefined }
           groups: ['baab']
         }
       ]
@@ -104,6 +104,7 @@ describe 'XRegExp tests', ->
         {
           match: 'aabc'
           named_groups: {
+            groups: undefined
             group: 'aab'
           }
           groups: ['aab']
@@ -124,7 +125,7 @@ describe 'XRegExp tests', ->
       expect(m).toEqual [
         {
           match: 'aa\nbb'
-          named_groups: undefined
+          named_groups: { groups: undefined }
           groups: ['aa\nbb']
         }
       ]
@@ -144,6 +145,7 @@ describe 'XRegExp tests', ->
         {
           match: 'xregex-spec.coffee:134'
           named_groups: {
+            groups: undefined
             file: 'xregex-spec.coffee'
             row: '134'
           }
