@@ -14,8 +14,9 @@ module.exports = RegexTester =
   activate: (state) ->
     @createRegexView()
     @disposables = new CompositeDisposable
-    @disposables.add atom.commands.add 'atom-workspace', 'regex-tester:toggle': => @regexview.show()
+    @disposables.add atom.commands.add 'atom-workspace', 'regex-tester:show': => @regexview.show()
+    @disposables.add atom.commands.add 'atom-workspace', 'regex-tester:hide': => @regexview.hide()
 
   deactivate: ->
-    @dispoables.dispose()
+    @disposables.dispose()
     @regexview.destroy()

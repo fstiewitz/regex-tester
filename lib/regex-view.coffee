@@ -65,7 +65,7 @@ module.exports =
         @regex_data.focus()
 
       @disposables = new CompositeDisposable
-      @disposables.add atom.commands.add 'atom-workspace', 'core:cancel': => @close()
+      @disposables.add atom.commands.add 'atom-workspace', 'core:cancel': => @hide()
       @disposables.add atom.tooltips.add(@global, title: 'Global Match')
       @disposables.add atom.tooltips.add(@ignore_case, title: 'Ignore Case')
       @disposables.add atom.tooltips.add(@multiline, title: 'Multiline')
@@ -85,7 +85,7 @@ module.exports =
       @panel?.destroy()
       @panel = null
 
-    close: ->
+    hide: ->
       @panel?.hide()
 
     show: ->

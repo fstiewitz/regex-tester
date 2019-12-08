@@ -1,0 +1,7 @@
+'.platform-darwin':
+  'cmd-r cmd-t': 'regex-tester:show'
+  'cmd-r cmd-h': 'regex-tester:hide'
+
+'.platform-linux, .platform-win32':
+  'ctrl-r ctrl-t': 'regex-tester:show'
+  'ctrl-r ctrl-h': 'regex-tester:hide'
