@@ -39,7 +39,7 @@ describe 'Regex View', ->
   describe 'When setting multi-line flag', ->
 
     beforeEach ->
-      expect(view.TestEditor.isMini()).toBe true
+      expect(view.TestEditor.isMini()).toBe false
       view.TestEditor.setText('abc\\ndef')
       view.multiline.click()
 
@@ -48,14 +48,14 @@ describe 'Regex View', ->
       expect(view.TestEditor.isMini()).toBe false
 
     it 'splits the input line', ->
-      expect(view.TestEditor.getText()).toBe 'abc\ndef'
+      expect(view.TestEditor.getText()).toBe 'abc\\ndef'
 
     describe 'When unchecking the flag', ->
       beforeEach ->
         view.multiline.click()
 
       it 'shows a mini editor', ->
-        expect(view.TestEditor.isMini()).toBe true
+        expect(view.TestEditor.isMini()).toBe false
 
       it 'merges all input lines', ->
         expect(view.TestEditor.getText()).toBe 'abc\\ndef'
@@ -63,7 +63,7 @@ describe 'Regex View', ->
   describe 'When setting free-space flag', ->
 
     beforeEach ->
-      expect(view.RegexEditor.isMini()).toBe true
+      expect(view.RegexEditor.isMini()).toBe false
       view.RegexEditor.setText('abc\\ndef')
       view.xregexp.click()
       view.free_space.click()
@@ -73,14 +73,14 @@ describe 'Regex View', ->
       expect(view.RegexEditor.isMini()).toBe false
 
     it 'splits the input line', ->
-      expect(view.RegexEditor.getText()).toBe 'abc\ndef'
+      expect(view.RegexEditor.getText()).toBe 'abc\\ndef'
 
     describe 'When unchecking the flag', ->
       beforeEach ->
         view.free_space.click()
 
       it 'shows a mini editor', ->
-        expect(view.RegexEditor.isMini()).toBe true
+        expect(view.RegexEditor.isMini()).toBe false
 
       it 'merges all input lines', ->
         expect(view.RegexEditor.getText()).toBe 'abc\\ndef'
