@@ -7,9 +7,15 @@
     "regex",
     "tester"
   ],
-  "activationCommands": {
-    "atom-workspace": "regex-tester:toggle"
-  },
+  "activationCommands":
+  [
+    {
+      "atom-workspace": "regex-tester:show"
+    },
+    {
+      "atom-workspace": "regex-tester:hide"
+    }
+  ],
   "repository": "https://github.com/deprint/regex-tester",
   "license": "MIT",
   "engines": {

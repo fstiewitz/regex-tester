@@ -15,7 +15,7 @@ module.exports =
         @div class: 'body', =>
           @div class:'block flex', =>
             @div class:'editor-item flex-editor', =>
-              @subview 'regex_data', new TextEditorView({mini: true, placeholderText:'Regular Expression'})
+              @subview 'regex_data', new TextEditorView({placeholderText:'Regular Expression'})
             @div =>
               @div id:'regex-type', class:'btn-group', =>
                 @button outlet:'regexp', class:'btn bold selected', 'RegExp'
@@ -31,7 +31,7 @@ module.exports =
                   @button outlet:'dot_all', class:'btn bold', '.'
           @div class:'block', =>
             @div class:'editor-item', =>
-              @subview 'test_data', new TextEditorView({mini:true, placeholderText:'Test Input'})
+              @subview 'test_data', new TextEditorView({placeholderText:'Test Input'})
           @div class:'output', outlet: 'output'
 
     initialize: ->
@@ -65,7 +65,7 @@ module.exports =
         @regex_data.focus()
 
       @disposables = new CompositeDisposable
-      @disposables.add atom.commands.add 'atom-workspace', 'core:cancel': => @close()
+      @disposables.add atom.commands.add 'atom-workspace', 'core:cancel': => @hide()
       @disposables.add atom.tooltips.add(@global, title: 'Global Match')
       @disposables.add atom.tooltips.add(@ignore_case, title: 'Ignore Case')
       @disposables.add atom.tooltips.add(@multiline, title: 'Multiline')
@@ -77,25 +77,19 @@ module.exports =
       @RegexEditor.onDidStopChanging => @update()
       @TestEditor.onDidStopChanging => @update()
 
-      @TestEditor.onDidChangeMini (mini) => if mini is true then @joinLines(@TestEditor) else @splitLines(@TestEditor)
-      @RegexEditor.onDidChangeMini (mini) => if mini is true then @joinLines(@RegexEditor) else @splitLines(@RegexEditor)
 
     destroy: ->
       @disposables.dispose()
       @panel?.destroy()
       @panel = null
 
-    close: ->
+    hide: ->
       @panel?.hide()
 
     show: ->
       @panel ?= atom.workspace.addBottomPanel(item: this)
       @panel.show()
       @regex_data.focus()
-
-    setEditorMinis: (reg, test) ->
-      @RegexEditor.setMini(reg)
-      @TestEditor.setMini(test)
 
     clear: ->
       @output.html('')
@@ -124,7 +118,8 @@ module.exports =
     update: ->
       @clear()
 
-      @setEditorMinis not (@xregexp.hasClass('selected') and @free_space.hasClass('selected')), not @multiline.hasClass('selected')
+      if (@RegexEditor.getText()=="")
+        return
 
       options =
         global: @global.hasClass('selected')

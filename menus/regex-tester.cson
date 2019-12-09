@@ -5,8 +5,12 @@
       'label': 'Regex-Tester'
       'submenu': [
         {
-          'label': 'Toggle'
-          'command': 'regex-tester:toggle'
+          'label': 'Show'
+          'command': 'regex-tester:show'
+        },
+        {
+          'label': 'Hide'
+          'command': 'regex-tester:hide'
         }
       ]
     ]
