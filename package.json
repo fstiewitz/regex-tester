@@ -1,14 +1,13 @@
 {
   "name": "regex-tester",
   "main": "lib/main",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Test Javascript regular expressions",
   "keywords": [
     "regex",
     "tester"
   ],
-  "activationCommands":
-  [
+  "activationCommands": [
     {
       "atom-workspace": "regex-tester:show"
     },
